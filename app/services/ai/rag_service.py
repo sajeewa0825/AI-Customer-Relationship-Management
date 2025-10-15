@@ -2,9 +2,9 @@ from langchain_groq import ChatGroq
 from app.core.config import Settings
 from app.services.embedding.embedding_service import retrieve_company_context
 
-def run_rag_query(company_id: int, user_prompt: str, history: list, system_prompt: str):
+def run_rag_query(user_prompt: str, history: list, system_prompt: str):
     # Step 1: Get relevant company context
-    context = retrieve_company_context(company_id, user_prompt)
+    context = retrieve_company_context(user_prompt)
 
     # Step 2: Initialize Groq LLM
     llm = ChatGroq(
@@ -24,5 +24,6 @@ def run_rag_query(company_id: int, user_prompt: str, history: list, system_promp
     messages.append(("human", user_prompt))
 
     # Step 4: Run the model
+    # print("Messages to LLM:", messages)
     ai_message = llm.invoke(messages)
     return ai_message.content

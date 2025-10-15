@@ -9,17 +9,16 @@ router = APIRouter()
 @router.post("/chat",  status_code=status.HTTP_201_CREATED)
 def chat_with_rag(request: ChatCreate):
 
-    if request.company_id is None:
-        raise HTTPException(status_code=400, detail="Company ID required")
     if request.user_id is None:
         raise HTTPException(status_code=400, detail="User ID required")
     if request.prompt is None:
         raise HTTPException(status_code=400, detail="Prompt Is required")
     
     # Load existing history
-    history = get_chat_history(request.company_id , request.user_id)
+    history = get_chat_history( request.user_id)
+    # print(f"Chat history: {history}")
 
-    system_prompt ="You are an assistant for context data given company. Use the following context"
+    system_prompt ="You are an assistant for context data given company. Use the following context. also use previous chat history"
     # Generate response using RAG
     filter  = classify_message("api", request.prompt)
     print(f"Classified message category: {filter.category}")
@@ -27,9 +26,9 @@ def chat_with_rag(request: ChatCreate):
         system_prompt += " to answer the question. If you don't know the answer, just say that you don't know, don't try to make up an answer. and say Company agent will contact you soon."
     else:
         system_prompt += ". If you don't know the answer, just say that you don't know, don't try to make up an answer."
-    ai_response = run_rag_query(request.company_id, request.prompt, history , system_prompt )
+    ai_response = run_rag_query(request.prompt, history , system_prompt )
 
     # Save to DB
-    chat = save_chat(request.company_id, request.prompt, ai_response , request.user_id)
+    chat = save_chat( request.prompt, ai_response , request.user_id)
 
     return chat

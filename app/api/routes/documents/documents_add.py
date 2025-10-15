@@ -33,15 +33,12 @@ def extract_text_from_docx(file_bytes: bytes) -> str:
 # ---------- MAIN ROUTE ---------- #
 @router.post("/", response_model=documentResponse, status_code=status.HTTP_201_CREATED)
 async def create_document(
-    company_id: int = Form(...),
     document_meta: str = Form(None),
     content: UploadFile = File(...),
     db: Session = Depends(get_db)
 ):
     if content is None:
         raise HTTPException(status_code=400, detail="No file uploaded")
-    if company_id is None:
-        raise HTTPException(status_code=400, detail="company_id is required")
 
     file_bytes = await content.read()
     filename = content.filename.lower()
@@ -64,17 +61,15 @@ async def create_document(
 
     # --- Save to Database --- #
     new_doc = model.Document(
-        company_id=company_id,
         document_meta=document_meta,
-        content=extracted_text,
-        embedding=embeddings  # pgvector field
+        embedding=embeddings,
+        content=extracted_text 
     )
     db.add(new_doc)
     db.commit()
     db.refresh(new_doc)
 
     return {
-        "company_id": new_doc.company_id,
         "document_meta": new_doc.document_meta,
-        "content": new_doc.content[:1000],  # preview first 1000 chars
+        "message": "Document added successfully"
     }

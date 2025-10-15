@@ -8,7 +8,6 @@ class Document(Base):
     __tablename__ = "vector_document"
 
     id = Column(Integer, primary_key=True, index=True)
-    company_id = Column(Integer, index=True)
-    content = Column(String, nullable=False)
     document_meta = Column(String, nullable=True)
+    content = Column(String, nullable=False)
     embedding = Column(Vector(384)) 

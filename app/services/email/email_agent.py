@@ -85,7 +85,7 @@ def auto_reply_agent():
 
         
         # Generate AI reply
-        ai_reply = run_rag_query(company_id=1, user_prompt=body, history=[], system_prompt =system_prompt)
+        ai_reply = run_rag_query( user_prompt=body, history=[], system_prompt =system_prompt)
         print(f"🤖 AI Reply:\n{ai_reply}")
 
         # Compose the reply

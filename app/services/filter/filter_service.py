@@ -17,7 +17,7 @@ class MessageCategory(BaseModel):
 # Initialize LLM with structured output
 def get_message_classifier():
     llm = ChatGroq(
-        model="llama-3.3-70b-versatile",
+        model=Settings.TEXT_FILTER_MODEL,
         api_key=Settings.GROQ_API_KEY,
         temperature=0,
     )

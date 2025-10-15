@@ -14,6 +14,7 @@ class Settings:
     EMAIL_HOST: str = os.getenv("EMAIL_HOST")
     EMAIL_PASSWORD: str = os.getenv("EMAIL_PASSWORD")
     EMAIL_ADDRESS: str = os.getenv("EMAIL_ADDRESS") 
+    TEXT_FILTER_MODEL: str = os.getenv("TEXT_FILTER_MODEL")
 
 
 settings = Settings()

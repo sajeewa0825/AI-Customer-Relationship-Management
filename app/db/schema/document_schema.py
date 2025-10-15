@@ -3,9 +3,9 @@ from typing import Optional
 
 
 class document(BaseModel):
-    company_id: int
-    content: str
     document_meta: Optional[str] = None
+    content: Optional[str] = None
+    message: str
 
 class documentCreate(document):
     pass
