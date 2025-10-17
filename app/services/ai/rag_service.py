@@ -33,7 +33,7 @@ async def run_rag_query(user_prompt: str, history: list, system_prompt: str):
             },
             "productDetails": {
                 "command": sys.executable,
-                "args": ["app/services/ai/tools/product_tool.py"],
+                "args": ["-m", "app.services.ai.tools.product_tool"],
                 "transport": "stdio",
             },
         }

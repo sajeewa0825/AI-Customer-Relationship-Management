@@ -10,4 +10,4 @@ EMAIL_ADDRESS=
 TEXT_FILTER_MODEL=
 Top_K_Context=
 CHAT_HISTORY_LIMIT=
-EXTERNAL_DATABASE=https://eod4aoatblua5m6.m.pipedream.net/?product_name=Monitor
+EXTERNAL_DATABASE_URL=https://eod4aoatblua5m6.m.pipedream.net/?product_name

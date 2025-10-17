@@ -17,6 +17,7 @@ class Settings:
     TEXT_FILTER_MODEL: str = os.getenv("TEXT_FILTER_MODEL")
     Top_K_Context: int = int(os.getenv("Top_K_Context", 1))
     CHAT_HISTORY_LIMIT: int = int(os.getenv("CHAT_HISTORY_LIMIT", 10))
+    EXTERNAL_DATABASE_URL: str = os.getenv("EXTERNAL_DATABASE_URL")
 
 
 settings = Settings()
