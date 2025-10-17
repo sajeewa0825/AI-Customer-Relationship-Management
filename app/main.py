@@ -16,7 +16,7 @@ async def background_email_checker():
             auto_reply_agent()
         except Exception as e:
             print(f"⚠️ Error in email checker: {e}")
-        await asyncio.sleep(300)  # check every 5 minute
+        await asyncio.sleep(3000)  # check every 5 minute
 
 @app.on_event("startup")
 def startup_event():
